@@ -37,6 +37,6 @@ jobs:
         ./IBM_Cloud_CLI/ibmcloud cf install
     - name: Restart IBM Cloud
       env:
-        IBM_APP_NAME: ${{ secrets.IBM_BACKEND_NAME }}
+        IBM_BACKEND_NAME: ${{ secrets.IBM_BACKEND_NAME }}
       run: |
         ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_BACKEND_NAME"
