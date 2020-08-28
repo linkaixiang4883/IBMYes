@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '0 12 * * FRI'
+    - cron: '0 12 * * FRI'      # 根据自己的需要设置何时重启
 
 jobs:
   ibm-cloud-restart:
@@ -29,11 +29,11 @@ jobs:
         cf login -a https://api.us-south.cf.cloud.ibm.com -u $IBM_ACCOUNT << EOF
         $IBM_PASSWORD
         EOF
-    - name: Target IBM Cloud
+    - name: Get IBM Cloud Apps
       run: |
         cf a
     - name: Restart IBM Cloud
       env:
-        IBM_BACKEND_NAME: ${{ secrets.IBM_BACKEND_NAME }}
+        IBM_APP_NAME: ${{ secrets.IBM_BACKEND_NAME }}
       run: |
-        cf restart $IBM_BACKEND_NAME
+        cf restart $IBM_APP_NAME
